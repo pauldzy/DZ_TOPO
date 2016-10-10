@@ -7,7 +7,7 @@ AS
    header: DZ_TOPO
      
    - Build ID: DZBUILDIDDZ
-   - TFS Change Set: DZCHANGESETDZ
+   - Change Set: DZCHANGESETDZ
    
    Utilities and helper objects for the manipulation and maintenance of Oracle 
    Spatial topologies.
