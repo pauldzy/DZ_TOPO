@@ -6,8 +6,8 @@ AS
    /*
    header: DZ_TOPO
      
-   - Build ID: DZBUILDIDDZ
-   - Change Set: DZCHANGESETDZ
+   - Release: %GITRELEASE%
+   - Commit Date: %GITCOMMITDATE%
    
    Utilities and helper objects for the manipulation and maintenance of Oracle 
    Spatial topologies.

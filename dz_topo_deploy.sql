@@ -1,15 +1,9 @@
-
---*************************--
-PROMPT sqlplus_header.sql;
-
 WHENEVER SQLERROR EXIT -99;
 WHENEVER OSERROR  EXIT -98;
 SET DEFINE OFF;
 
-
-
---*************************--
-PROMPT DZ_TOPO_VRY.tps;
+--******************************--
+PROMPT Collections/DZ_TOPO_VRY.tps 
 
 CREATE OR REPLACE TYPE dz_topo_vry FORCE                                    
 AS 
@@ -18,9 +12,8 @@ VARRAY(1048576) OF MDSYS.SDO_TOPO_GEOMETRY;
 
 GRANT EXECUTE ON dz_topo_vry TO PUBLIC;
 
-
---*************************--
-PROMPT DZ_TOPO_UTIL.pks;
+--******************************--
+PROMPT Packages/DZ_TOPO_UTIL.pks 
 
 CREATE OR REPLACE PACKAGE dz_topo_util
 AUTHID CURRENT_USER
@@ -138,9 +131,8 @@ END dz_topo_util;
 
 GRANT EXECUTE ON dz_topo_util TO public;
 
-
---*************************--
-PROMPT DZ_TOPO_UTIL.pkb;
+--******************************--
+PROMPT Packages/DZ_TOPO_UTIL.pkb 
 
 CREATE OR REPLACE PACKAGE BODY dz_topo_util
 AS
@@ -1160,9 +1152,8 @@ AS
 END dz_topo_util;
 /
 
-
---*************************--
-PROMPT DZ_TOPO_EDGE.tps;
+--******************************--
+PROMPT Types/DZ_TOPO_EDGE.tps 
 
 CREATE OR REPLACE TYPE dz_topo_edge FORCE
 AUTHID CURRENT_USER
@@ -1193,9 +1184,8 @@ AS OBJECT (
 
 GRANT EXECUTE ON dz_topo_edge TO PUBLIC;
 
-
---*************************--
-PROMPT DZ_TOPO_EDGE.tpb;
+--******************************--
+PROMPT Types/DZ_TOPO_EDGE.tpb 
 
 CREATE OR REPLACE TYPE BODY dz_topo_edge
 AS
@@ -1263,9 +1253,8 @@ AS
 END;
 /
 
-
---*************************--
-PROMPT DZ_TOPO_EDGE_LIST.tps;
+--******************************--
+PROMPT Collections/DZ_TOPO_EDGE_LIST.tps 
 
 CREATE OR REPLACE TYPE dz_topo_edge_list FORCE                                
 AS 
@@ -1274,9 +1263,8 @@ TABLE OF dz_topo_edge;
 
 GRANT EXECUTE ON dz_topo_edge_list TO PUBLIC;
 
-
---*************************--
-PROMPT DZ_TOPO_RING.tps;
+--******************************--
+PROMPT Types/DZ_TOPO_RING.tps 
 
 CREATE OR REPLACE TYPE dz_topo_ring FORCE
 AUTHID CURRENT_USER
@@ -1333,9 +1321,8 @@ AS OBJECT (
 
 GRANT EXECUTE ON dz_topo_ring TO PUBLIC;
 
-
---*************************--
-PROMPT DZ_TOPO_RING.tpb;
+--******************************--
+PROMPT Types/DZ_TOPO_RING.tpb 
 
 CREATE OR REPLACE TYPE BODY dz_topo_ring
 AS
@@ -1611,9 +1598,8 @@ AS
 END;
 /
 
-
---*************************--
-PROMPT DZ_TOPO_RING_LIST.tps;
+--******************************--
+PROMPT Collections/DZ_TOPO_RING_LIST.tps 
 
 CREATE OR REPLACE TYPE dz_topo_ring_list FORCE                                       
 AS 
@@ -1622,9 +1608,8 @@ TABLE OF dz_topo_ring;
 
 GRANT EXECUTE ON dz_topo_ring_list TO PUBLIC;
 
-
---*************************--
-PROMPT DZ_TOPO_MAP_MGR.tps;
+--******************************--
+PROMPT Types/DZ_TOPO_MAP_MGR.tps 
 
 CREATE OR REPLACE TYPE dz_topo_map_mgr FORCE
 AUTHID CURRENT_USER
@@ -1798,9 +1783,8 @@ AS OBJECT (
 
 GRANT EXECUTE ON dz_topo_map_mgr TO PUBLIC;
 
-
---*************************--
-PROMPT DZ_TOPO_MAP_MGR.tpb;
+--******************************--
+PROMPT Types/DZ_TOPO_MAP_MGR.tpb 
 
 CREATE OR REPLACE TYPE BODY dz_topo_map_mgr
 AS
@@ -2619,9 +2603,8 @@ AS
 END;
 /
 
-
---*************************--
-PROMPT DZ_TOPO_LAYER.tps;
+--******************************--
+PROMPT Types/DZ_TOPO_LAYER.tps 
 
 CREATE OR REPLACE TYPE dz_topo_layer FORCE
 AUTHID CURRENT_USER
@@ -2734,9 +2717,8 @@ AS OBJECT (
 
 GRANT EXECUTE ON dz_topo_layer TO PUBLIC;
 
-
---*************************--
-PROMPT DZ_TOPO_LAYER.tpb;
+--******************************--
+PROMPT Types/DZ_TOPO_LAYER.tpb 
 
 CREATE OR REPLACE TYPE BODY dz_topo_layer
 AS
@@ -3161,9 +3143,8 @@ AS
 END;
 /
 
-
---*************************--
-PROMPT DZ_TOPO_LAYER_LIST.tps;
+--******************************--
+PROMPT Collections/DZ_TOPO_LAYER_LIST.tps 
 
 CREATE OR REPLACE TYPE dz_topo_layer_list FORCE                                      
 AS 
@@ -3172,9 +3153,8 @@ TABLE OF dz_topo_layer;
 
 GRANT EXECUTE ON dz_topo_layer_list TO PUBLIC;
 
-
---*************************--
-PROMPT DZ_TOPOLOGY.tps;
+--******************************--
+PROMPT Types/DZ_TOPOLOGY.tps 
 
 CREATE OR REPLACE TYPE dz_topology FORCE
 AUTHID CURRENT_USER
@@ -3332,9 +3312,8 @@ AS OBJECT (
 
 GRANT EXECUTE ON dz_topology TO PUBLIC;
 
-
---*************************--
-PROMPT DZ_TOPOLOGY.tpb;
+--******************************--
+PROMPT Types/DZ_TOPOLOGY.tpb 
 
 CREATE OR REPLACE TYPE BODY dz_topology
 AS
@@ -3887,9 +3866,8 @@ AS
 END;
 /
 
-
---*************************--
-PROMPT DZ_TOPO_MAIN.pks;
+--******************************--
+PROMPT Packages/DZ_TOPO_MAIN.pks 
 
 CREATE OR REPLACE PACKAGE dz_topo_main
 AUTHID CURRENT_USER
@@ -3899,8 +3877,8 @@ AS
    /*
    header: DZ_TOPO
      
-   - Build ID: 5
-   - TFS Change Set: 8290
+   - Release: 
+   - Commit Date: Mon Oct 10 16:42:02 2016 -0400
    
    Utilities and helper objects for the manipulation and maintenance of Oracle 
    Spatial topologies.
@@ -4353,9 +4331,8 @@ END dz_topo_main;
 
 GRANT EXECUTE ON dz_topo_main TO public;
 
-
---*************************--
-PROMPT DZ_TOPO_MAIN.pkb;
+--******************************--
+PROMPT Packages/DZ_TOPO_MAIN.pkb 
 
 CREATE OR REPLACE PACKAGE BODY dz_topo_main
 AS
@@ -7955,9 +7932,8 @@ AS
 END dz_topo_main;
 /
 
-
---*************************--
-PROMPT DZ_TOPO_PROCESSING.pks;
+--******************************--
+PROMPT Packages/DZ_TOPO_PROCESSING.pks 
 
 CREATE OR REPLACE PACKAGE dz_topo_processing
 AUTHID CURRENT_USER
@@ -7983,9 +7959,8 @@ END dz_topo_processing;
 
 GRANT EXECUTE ON dz_topo_processing TO public;
 
-
---*************************--
-PROMPT DZ_TOPO_PROCESSING.pkb;
+--******************************--
+PROMPT Packages/DZ_TOPO_PROCESSING.pkb 
 
 CREATE OR REPLACE PACKAGE BODY dz_topo_processing
 AS
@@ -8023,18 +7998,17 @@ AS
 END dz_topo_processing;
 /
 
-
---*************************--
-PROMPT DZ_TOPO_TEST.pks;
+--******************************--
+PROMPT Packages/DZ_TOPO_TEST.pks 
 
 CREATE OR REPLACE PACKAGE dz_topo_test
 AUTHID CURRENT_USER
 AS
 
-   C_TFS_CHANGESET CONSTANT NUMBER := 8290;
-   C_JENKINS_JOBNM CONSTANT VARCHAR2(255 Char) := 'NULL';
-   C_JENKINS_BUILD CONSTANT NUMBER := 5;
-   C_JENKINS_BLDID CONSTANT VARCHAR2(255 Char) := 'NULL';
+   C_GITRELEASE    CONSTANT VARCHAR2(255 Char) := '';
+   C_GITCOMMIT     CONSTANT VARCHAR2(255 Char) := '0df7bce4303ebd4ac67295ed2ca045ca2ecdd7ad';
+   C_GITCOMMITDATE CONSTANT VARCHAR2(255 Char) := 'Mon Oct 10 16:42:02 2016 -0400';
+   C_GITCOMMITAUTH CONSTANT VARCHAR2(255 Char) := 'Paul Dziemiela';
 
    C_TEST_SCHEMA   CONSTANT VARCHAR2(30 Char)  := 'DZ_SCRATCH';
    C_DZ_TESTDATA   CONSTANT VARCHAR2(30 Char)  := 'DZ_TESTDATA';
@@ -8066,9 +8040,8 @@ END dz_topo_test;
 
 GRANT EXECUTE ON dz_topo_test TO public;
 
-
---*************************--
-PROMPT DZ_TOPO_TEST.pkb;
+--******************************--
+PROMPT Packages/DZ_TOPO_TEST.pkb 
 
 CREATE OR REPLACE PACKAGE BODY dz_topo_test
 AS
@@ -8141,10 +8114,12 @@ AS
    RETURN VARCHAR2
    AS
    BEGIN
-      RETURN '{"TFS":' || C_TFS_CHANGESET || ','
-      || '"JOBN":"' || C_JENKINS_JOBNM || '",'   
-      || '"BUILD":' || C_JENKINS_BUILD || ','
-      || '"BUILDID":"' || C_JENKINS_BLDID || '"}';
+      RETURN '{'
+      || ' "GITRELEASE":"'    || C_GITRELEASE    || '"'
+      || ',"GITCOMMIT":"'     || C_GITCOMMIT     || '"'
+      || ',"GITCOMMITDATE":"' || C_GITCOMMITDATE || '"'
+      || ',"GITCOMMITAUTH":"' || C_GITCOMMITAUTH || '"'
+      || '}';
       
    END version;
    
@@ -8387,9 +8362,8 @@ AS
 END dz_topo_test;
 /
 
-
---*************************--
-PROMPT DZ_TOPO_RECIPES.pks;
+--******************************--
+PROMPT Packages/DZ_TOPO_RECIPES.pks 
 
 CREATE OR REPLACE PACKAGE dz_topo_recipes
 AUTHID CURRENT_USER
@@ -8418,9 +8392,8 @@ END dz_topo_recipes;
 
 GRANT EXECUTE ON dz_topo_recipes TO public;
 
-
---*************************--
-PROMPT DZ_TOPO_RECIPES.pkb;
+--******************************--
+PROMPT Packages/DZ_TOPO_RECIPES.pkb 
 
 CREATE OR REPLACE PACKAGE BODY dz_topo_recipes
 AS
@@ -8820,9 +8793,8 @@ AS
 END dz_topo_recipes;
 /
 
-
---*************************--
-PROMPT DZ_TOPO_VALIDATE.pks;
+--******************************--
+PROMPT Packages/DZ_TOPO_VALIDATE.pks 
 
 CREATE OR REPLACE PACKAGE dz_topo_validate
 AUTHID CURRENT_USER
@@ -8916,9 +8888,8 @@ END dz_topo_validate;
 
 GRANT EXECUTE ON dz_topo_validate TO public;
 
-
---*************************--
-PROMPT DZ_TOPO_VALIDATE.pkb;
+--******************************--
+PROMPT Packages/DZ_TOPO_VALIDATE.pkb 
 
 CREATE OR REPLACE PACKAGE BODY dz_topo_validate
 AS
@@ -9759,9 +9730,8 @@ AS
 END dz_topo_validate;
 /
 
-
---*************************--
-PROMPT DZ_TOPO_REPORTS.pks;
+--******************************--
+PROMPT Packages/DZ_TOPO_REPORTS.pks 
 
 CREATE OR REPLACE PACKAGE dz_topo_reports
 AUTHID CURRENT_USER
@@ -9885,9 +9855,8 @@ END dz_topo_reports;
 
 GRANT EXECUTE ON dz_topo_reports TO public;
 
-
---*************************--
-PROMPT DZ_TOPO_REPORTS.pkb;
+--******************************--
+PROMPT Packages/DZ_TOPO_REPORTS.pkb 
 
 CREATE OR REPLACE PACKAGE BODY dz_topo_reports
 AS
@@ -10516,11 +10485,6 @@ AS
 END dz_topo_reports;
 /
 
-
---*************************--
-PROMPT sqlplus_footer.sql;
-
-
 SHOW ERROR;
 
 DECLARE
@@ -10554,4 +10518,5 @@ END;
 /
 
 EXIT;
+SET DEFINE OFF;
 

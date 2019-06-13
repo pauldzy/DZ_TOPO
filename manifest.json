@@ -1,0 +1,156 @@
+{
+    "constants": [
+       {
+          "key":   "JOBNAME"
+         ,"value": "DZ_TOPO"
+       }
+      ,{
+          "key": "GITRELEASE"
+         ,"cmd": "git describe --abbrev=0 --tags"
+       }
+      ,{
+          "key": "GITCOMMIT"
+         ,"cmd": "git rev-parse master"
+       }
+      ,{
+          "key": "GITCOMMITDATE"
+         ,"cmd": "git show -s --format=%cd"
+       }
+      ,{
+          "key": "GITCOMMITAUTH"
+         ,"cmd": "git show -s --format=%an"
+       }
+    ]
+   ,"tasks": [
+       {
+          "id": "concatenate"
+         ,"output": "dz_topo_deploy.sql"
+         ,"includes": [
+             "%%SQLHEADER%%"
+            ,"Collections/DZ_TOPO_VRY.tps"
+            ,"Packages/DZ_TOPO_UTIL.pks"
+            ,"Packages/DZ_TOPO_UTIL.pkb"
+            ,"Types/DZ_TOPO_EDGE.tps"
+            ,"Types/DZ_TOPO_EDGE.tpb"
+            ,"Collections/DZ_TOPO_EDGE_LIST.tps"
+            ,"Types/DZ_TOPO_RING.tps"
+            ,"Types/DZ_TOPO_RING.tpb"
+            ,"Collections/DZ_TOPO_RING_LIST.tps"
+            ,"Types/DZ_TOPO_MAP_MGR.tps"
+            ,"Types/DZ_TOPO_MAP_MGR.tpb"
+            ,"Types/DZ_TOPO_LAYER.tps"
+            ,"Types/DZ_TOPO_LAYER.tpb"
+            ,"Collections/DZ_TOPO_LAYER_LIST.tps"
+            ,"Types/DZ_TOPOLOGY.tps"
+            ,"Types/DZ_TOPOLOGY.tpb"
+            ,"Packages/DZ_TOPO_MAIN.pks"
+            ,"Packages/DZ_TOPO_MAIN.pkb"
+            ,"Packages/DZ_TOPO_PROCESSING.pks"
+            ,"Packages/DZ_TOPO_PROCESSING.pkb"
+            ,"Packages/DZ_TOPO_TEST.pks"
+            ,"Packages/DZ_TOPO_TEST.pkb"
+            ,"Packages/DZ_TOPO_RECIPES.pks"
+            ,"Packages/DZ_TOPO_RECIPES.pkb"
+            ,"Packages/DZ_TOPO_VALIDATE.pks"
+            ,"Packages/DZ_TOPO_VALIDATE.pkb"
+            ,"Packages/DZ_TOPO_REPORTS.pks"
+            ,"Packages/DZ_TOPO_REPORTS.pkb"
+            ,"%%SQLFOOTER%%"
+          ]
+         ,"separator": "--******************************--\nPROMPT %%FILENAME%% \n\n"
+         ,"components": [
+             {
+                "identifier": "SQLHEADER"
+               ,"content": [
+                   "WHENEVER SQLERROR EXIT -99;"
+                  ,"WHENEVER OSERROR  EXIT -98;"
+                  ,"SET DEFINE OFF;"
+                  ,""
+                ]
+             }
+            ,{
+                "identifier": "SQLFOOTER"
+               ,"content": [
+                   "SHOW ERROR;"
+                  ,""
+                  ,"DECLARE"
+                  ,"   l_num_errors PLS_INTEGER;"
+                  ,""
+                  ,"BEGIN"
+                  ,""
+                  ,"   SELECT"
+                  ,"   COUNT(*)"
+                  ,"   INTO l_num_errors"
+                  ,"   FROM"
+                  ,"   user_errors a"
+                  ,"   WHERE"
+                  ,"   a.name LIKE '%JOBNAME%%';"
+                  ,""
+                  ,"   IF l_num_errors <> 0"
+                  ,"   THEN"
+                  ,"      RAISE_APPLICATION_ERROR(-20001,'COMPILE ERROR');"
+                  ,""
+                  ,"   END IF;"
+                  ,""
+                  ,"   l_num_errors := %JOBNAME%_TEST.inmemory_test();"
+                  ,""
+                  ,"   IF l_num_errors <> 0"
+                  ,"   THEN"
+                  ,"      RAISE_APPLICATION_ERROR(-20001,'INMEMORY TEST ERROR');"
+                  ,""
+                  ,"   END IF;"
+                  ,""
+                  ,"END;"
+                  ,"/"
+                  ,""
+                  ,"EXIT;"
+                  ,"SET DEFINE OFF;"
+                  ,""
+                ]
+             }
+          ]
+         ,"configurations": [
+            {
+                "id": 1
+               ,"file": "Packages/DZ_TOPO_TEST.pks"
+               ,"replacements": [
+                   {
+                      "string": "C_GITRELEASE    CONSTANT VARCHAR2(255 Char) := 'NULL';"
+                     ,"value":  "C_GITRELEASE    CONSTANT VARCHAR2(255 Char) := '%GITRELEASE%';"
+                   }
+                  ,{
+                      "string": "C_GITCOMMIT     CONSTANT VARCHAR2(255 Char) := 'NULL';"
+                     ,"value":  "C_GITCOMMIT     CONSTANT VARCHAR2(255 Char) := '%GITCOMMIT%';"
+                   }
+                  ,{
+                      "string": "C_GITCOMMITDATE CONSTANT VARCHAR2(255 Char) := 'NULL';"
+                     ,"value":  "C_GITCOMMITDATE CONSTANT VARCHAR2(255 Char) := '%GITCOMMITDATE%';"
+                   }
+                  ,{
+                      "string": "C_GITCOMMITAUTH CONSTANT VARCHAR2(255 Char) := 'NULL';"
+                     ,"value":  "C_GITCOMMITAUTH CONSTANT VARCHAR2(255 Char) := '%GITCOMMITAUTH%';"
+                   }
+                ]
+            }
+          ]
+       }
+      ,{
+          "id": "naturaldocs"
+         ,"input":  "dz_topo_deploy.sql"
+         ,"output_dir": "stage1"
+       }
+      ,{
+          "id": "wkhtmltopdf"
+         ,"input_dir": "stage1"
+         ,"output": "dz_topo_deploy.pdf"
+       }
+      ,{
+          "id": "artifacts"
+         ,"targets": [
+             "dz_topo_deploy.sql"
+            ,"dz_topo_deploy.pdf"
+         ]
+       }
+   ]
+}
+
